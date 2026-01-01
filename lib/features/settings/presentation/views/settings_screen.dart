@@ -31,6 +31,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     final result = await _updateService.checkForUpdates();
 
+    // Debug: Print version info
+    debugPrint('=== UPDATE CHECK ===');
+    debugPrint('Current Version: ${result.currentVersion}');
+    debugPrint('Latest Version: ${result.latestVersion}');
+    debugPrint('Update Available: ${result.available}');
+    debugPrint('Error: ${result.error}');
+    debugPrint('====================');
+
     if (mounted) {
       setState(() {
         _isCheckingUpdate = false;
@@ -46,7 +54,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ).showSnackBar(SnackBar(content: Text(result.error!)));
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('You are on the latest version!')),
+            SnackBar(
+              content: Text(
+                'You are on v${result.currentVersion} - Latest is v${result.latestVersion}',
+              ),
+            ),
           );
         }
       } else if (result.available) {
