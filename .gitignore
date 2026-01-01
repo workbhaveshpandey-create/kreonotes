@@ -1,0 +1,41 @@
+# Flutter/Dart
+.dart_tool/
+.packages
+build/
+*.iml
+*.lock
+
+# Android
+android/.gradle/
+android/app/debug/
+android/app/profile/
+android/app/release/
+android/local.properties
+*.apk
+*.aab
+
+# iOS
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework/
+ios/Flutter/Flutter.podspec
+*.xcworkspace/
+
+# macOS
+macos/Flutter/GeneratedPluginRegistrant.swift
+
+# IDE
+.idea/
+*.code-workspace
+.vscode/
+
+# Secrets
+.env
+*.keystore
+*.jks
+google-services.json
+GoogleService-Info.plist
+
+# Misc
+.DS_Store
+*.log
