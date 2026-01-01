@@ -139,13 +139,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: _isListening ? _stopListening : _startListening,
                     backgroundColor: _isListening
                         ? Colors.redAccent
-                        : Colors.blueAccent,
+                        : Theme.of(
+                            context,
+                          ).floatingActionButtonTheme.backgroundColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Icon(
                       _isListening ? Icons.stop : Icons.auto_awesome,
-                      color: Colors.white,
+                      color: _isListening
+                          ? Colors.white
+                          : Theme.of(
+                              context,
+                            ).floatingActionButtonTheme.foregroundColor,
                     ),
                   ),
                 ),
