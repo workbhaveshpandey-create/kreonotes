@@ -127,60 +127,65 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          floatingActionButton: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // AI Create FAB
-              if (!_showArchived)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: FloatingActionButton(
-                    heroTag: 'assistant_fab',
-                    onPressed: _isListening ? _stopListening : _startListening,
-                    backgroundColor: _isListening
-                        ? Colors.redAccent
-                        : Theme.of(
-                            context,
-                          ).floatingActionButtonTheme.backgroundColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Icon(
-                      _isListening ? Icons.stop : Icons.auto_awesome,
-                      color: _isListening
-                          ? Colors.white
+          floatingActionButton: Padding(
+            padding: const EdgeInsets.only(right: 8, bottom: 16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // AI Create FAB
+                if (!_showArchived)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: FloatingActionButton(
+                      heroTag: 'assistant_fab',
+                      onPressed: _isListening
+                          ? _stopListening
+                          : _startListening,
+                      backgroundColor: _isListening
+                          ? Colors.redAccent
                           : Theme.of(
                               context,
-                            ).floatingActionButtonTheme.foregroundColor,
+                            ).floatingActionButtonTheme.backgroundColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Icon(
+                        _isListening ? Icons.stop : Icons.auto_awesome,
+                        color: _isListening
+                            ? Colors.white
+                            : Theme.of(
+                                context,
+                              ).floatingActionButtonTheme.foregroundColor,
+                      ),
                     ),
                   ),
-                ),
-              FloatingActionButton(
-                heroTag: 'add_fab',
-                onPressed: () {
-                  final authState = context.read<AuthBloc>().state;
-                  final userId = (authState is AuthAuthenticated)
-                      ? authState.user.uid
-                      : 'local';
-                  context.read<PagesBloc>().add(
-                    PageCreateRequested(userId, title: '', icon: '📄'),
-                  );
-                },
-                backgroundColor: Theme.of(
-                  context,
-                ).floatingActionButtonTheme.backgroundColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Icon(
-                  Icons.add,
-                  color: Theme.of(
+                FloatingActionButton(
+                  heroTag: 'add_fab',
+                  onPressed: () {
+                    final authState = context.read<AuthBloc>().state;
+                    final userId = (authState is AuthAuthenticated)
+                        ? authState.user.uid
+                        : 'local';
+                    context.read<PagesBloc>().add(
+                      PageCreateRequested(userId, title: '', icon: '📄'),
+                    );
+                  },
+                  backgroundColor: Theme.of(
                     context,
-                  ).floatingActionButtonTheme.foregroundColor,
-                  size: 32,
+                  ).floatingActionButtonTheme.backgroundColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Icon(
+                    Icons.add,
+                    color: Theme.of(
+                      context,
+                    ).floatingActionButtonTheme.foregroundColor,
+                    size: 32,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
