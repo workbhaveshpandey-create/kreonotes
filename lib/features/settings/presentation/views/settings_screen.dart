@@ -137,9 +137,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onPressed: () async {
               Navigator.pop(ctx);
               if (result.downloadUrl != null) {
-                final uri = Uri.parse(result.downloadUrl!);
-                if (await canLaunchUrl(uri)) {
-                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+                debugPrint('Launching URL: ${result.downloadUrl}');
+                try {
+                  final uri = Uri.parse(result.downloadUrl!);
+                  final launched = await launchUrl(
+                    uri,
+                    mode: LaunchMode.externalApplication,
+                  );
+                  if (!launched) {
+                    // Fallback: try with browser mode
+                    await launchUrl(uri, mode: LaunchMode.platformDefault);
+                  }
+                } catch (e) {
+                  debugPrint('Error launching URL: $e');
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Error: Could not open download link'),
+                      ),
+                    );
+                  }
                 }
               }
             },

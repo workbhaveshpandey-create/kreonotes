@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'firebase_options.dart';
 import 'app/app.dart';
+import 'core/services/notification_service.dart';
 
 /// Main entry point for Kreo Notes
 void main() async {
@@ -44,6 +45,13 @@ void main() async {
     persistenceEnabled: true,
     cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
   );
+
+  // Initialize notification service
+  final notificationService = NotificationService();
+  await notificationService.init();
+
+  // Check for updates on app start (async, non-blocking)
+  notificationService.checkAndNotify();
 
   // Run the app
   runApp(const KreoNotesApp());
