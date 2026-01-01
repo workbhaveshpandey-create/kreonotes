@@ -3,12 +3,12 @@ import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 
 class UpdateService {
-  // GitHub releases API URL - Update this with your actual repo
+  // GitHub releases API URL
   static const String _githubApiUrl =
-      'https://api.github.com/repos/kreoecosystem/kreonotes/releases/latest';
+      'https://api.github.com/repos/workbhaveshpandey-create/kreonotes/releases/latest';
 
   static const String _downloadBaseUrl =
-      'https://github.com/kreoecosystem/kreonotes/releases/latest/download/kreonotes.apk';
+      'https://github.com/workbhaveshpandey-create/kreonotes/releases/latest/download/app-release.apk';
 
   String? _currentVersion;
   String? _latestVersion;
